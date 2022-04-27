@@ -6,13 +6,17 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 pub mod solana_twitter {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
+    pub fn initialize(ctx: Context<SendTweet>) -> Result<()> {
         Ok(())
     }
 }
 
 #[derive(Accounts)]
-pub struct Initialize {}
+pub struct SendTweet<'info> {
+    pub tweet: Account<'info, Tweet>,
+    pub author: Signer<'info>,
+    pub system_program: AccountInfo<'info>,
+}
 
 #[account]
 pub struct Tweet {
