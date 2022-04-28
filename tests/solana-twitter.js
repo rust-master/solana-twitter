@@ -2,7 +2,7 @@ const assert = require("assert");
 const anchor = require("@project-serum/anchor");
 const { SystemProgram } = anchor.web3;
 
-describe("basic-anchor", () => {
+describe("solana-twitter", () => {
   // Use a local provider.
   const provider = anchor.AnchorProvider.local();
 
@@ -96,7 +96,7 @@ describe("basic-anchor", () => {
   it('cannot provide a topic with more than 50 characters', async () => {
     try {
       const tweet = anchor.web3.Keypair.generate();
-      const topicWith51Chars = 'x'.repeat(51);
+      const topicWith51Chars = 'x'.repeat(33);
       await program.rpc.sendTweet(topicWith51Chars, 'Hummus, am I right?', {
         accounts: {
           tweet: tweet.publicKey,
@@ -111,6 +111,26 @@ describe("basic-anchor", () => {
     }
 
     // assert.fail('The instruction should have failed with a 51-character topic.');
+  });
+
+  it('can fetch all tweets', async () => {
+    const tweetAccounts = await program.account.tweet.all();
+    console.log(tweetAccounts);
+    assert.equal(tweetAccounts.length, 4);
+  });
+
+  it('can filter tweets by author', async () => {
+    const authorPublicKey = program.provider.wallet.publicKey
+    const tweetAccounts = await program.account.tweet.all([
+      {
+        memcmp: {
+          offset: 8, // Discriminator.
+          bytes: authorPublicKey.toBase58(),
+        }
+      }
+    ]);
+
+    assert.equal(tweetAccounts.length, 3);
   });
 
 });
