@@ -1,14 +1,12 @@
 use anchor_lang::prelude::*;
-use anchor_lang::solana_program::system_program;
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("98d32F5rG4bePA4Wx7iEqMy9iEeTF1T78avNqA4Zydku");
 
 #[program]
 pub mod solana_twitter {
-    use anchor_lang::solana_program::entrypoint_deprecated::ProgramResult;
 
     use super::*;
-    pub fn send_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> ProgramResult {
+    pub fn send_tweet(ctx: Context<SendTweet>, topic: String, content: String) -> Result<()> {
         let tweet: &mut Account<Tweet> = &mut ctx.accounts.tweet;
         let author: &Signer = &ctx.accounts.author;
         let clock: Clock = Clock::get().unwrap();
@@ -36,8 +34,7 @@ pub struct SendTweet<'info> {
     pub tweet: Account<'info, Tweet>,
     #[account(mut)]
     pub author: Signer<'info>,
-    #[account(address = system_program::ID)]
-    pub system_program: AccountInfo<'info>,
+    pub system_program: Program<'info, System>,
 }
 
 #[account]
