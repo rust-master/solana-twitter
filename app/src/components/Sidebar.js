@@ -13,25 +13,25 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import { Button } from "@material-ui/core";
 
 const Sidebar = () => {
-  return (
-      <div className="sidebar">
-          <TwitterIcon className="sidebar__twitterIcon" />
+    return (
+        <div className="sidebar">
+            <h3 className="color">Solana Twitter</h3>
+            <TwitterIcon className="sidebar__twitterIcon" />
+            <SidebarOption Icon={HomeIcon} text="Home" />
+            <SidebarOption Icon={SearchIcon} text="Topics" />
+            {/* <SidebarOption Icon={NotificationsNoneIcon} text="User" />
+            <SidebarOption Icon={MailOutlineIcon} text="Messages" />
+            <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" /> */}
+            <SidebarOption Icon={ListAltIcon} text="Users" />
+            <SidebarOption Icon={PermIdentityIcon} text="Profile" />
+            {/* <SidebarOption Icon={MoreHorizIcon} text="More" /> */}
 
-          <SidebarOption Icon={HomeIcon} text="Home" />
-          <SidebarOption Icon={SearchIcon} text="Explore" />
-          <SidebarOption Icon={NotificationsNoneIcon} text="Notifications" />
-          <SidebarOption Icon={MailOutlineIcon} text="Messages" />
-          <SidebarOption Icon={BookmarkBorderIcon} text="Bookmarks" />
-          <SidebarOption Icon={ListAltIcon} text="Lists" />
-          <SidebarOption Icon={PermIdentityIcon} text="Profile" />
-          <SidebarOption Icon={MoreHorizIcon} text="More" />
-
-          {/* Button -> Tweet */}
-          <Button variant="outlined" className="sidebar__tweet" fullWidth>
-              Tweet
-          </Button>
-      </div>
-  )
+            {/* Button -> Tweet */}
+            <Button variant="outlined" className="sidebar__tweet" fullWidth>
+                Tweet
+            </Button>
+        </div>
+    )
 }
 
 export default Sidebar
