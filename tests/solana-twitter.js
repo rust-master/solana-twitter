@@ -17,7 +17,7 @@ describe("solana-twitter", () => {
 
   //Address of the deployed program
   const programId = new anchor.web3.PublicKey(
-    "98d32F5rG4bePA4Wx7iEqMy9iEeTF1T78avNqA4Zydku"
+    "7YGPzVLSoPhJf7AVG6fdYUUMX3PaPD4hSNucRE3k4Wz2"
   );
 
   //Generate the program client from IDL
