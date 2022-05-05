@@ -1,12 +1,10 @@
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
     ConnectionProvider,
-    useAnchorWallet,
     WalletProvider,
 } from "@solana/wallet-adapter-react";
 import {
     WalletModalProvider,
-    WalletMultiButton,
 } from "@solana/wallet-adapter-react-ui";
 import {
     GlowWalletAdapter,
@@ -15,8 +13,7 @@ import {
     SolflareWalletAdapter,
     TorusWalletAdapter,
 } from "@solana/wallet-adapter-wallets";
-import { Program, Provider, web3, BN } from "@project-serum/anchor";
-import { clusterApiUrl, Connection } from "@solana/web3.js";
+import { clusterApiUrl } from "@solana/web3.js";
 import React, { FC, ReactNode, useMemo } from "react";
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
