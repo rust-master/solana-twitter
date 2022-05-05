@@ -5,6 +5,10 @@
     overflow-y: scroll;
 }
 
+.appwallet{
+    margin-left: 69%;
+  }
+
 /* Hide scrollbar for Chrome, Safari and Opera */
 .feed::-webkit-scrollbar {
     display: none;
@@ -24,7 +28,7 @@
     background-color: white;
     z-index: 100;
     border: 1px solid var(--twitter-background);
-    padding: 15px 20px;
+    padding: 15px 15px;
 }
 
 .feed__header>h2 {

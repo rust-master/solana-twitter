@@ -35,11 +35,7 @@ const App: FC = () => {
             < div className="app">
                 <Sidebar />
                 <Feed />
-                <div className="appwallet" >
-                    <Context>
-                        <WalletMultiButton />
-                    </Context>
-                </div>
+
             </div>
         </div>
     );
