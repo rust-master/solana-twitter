@@ -3,26 +3,11 @@ import "./TweetBox.css";
 import Avatar from 'avataaars';
 import { generateRandomAvatarOptions } from '../../utils/avatar';
 import { Button } from "@material-ui/core";
-
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import {
-    ConnectionProvider,
     useAnchorWallet,
-    WalletProvider,
 } from "@solana/wallet-adapter-react";
-import {
-    WalletModalProvider,
-    WalletMultiButton,
-} from "@solana/wallet-adapter-react-ui";
-import {
-    GlowWalletAdapter,
-    PhantomWalletAdapter,
-    SlopeWalletAdapter,
-    SolflareWalletAdapter,
-    TorusWalletAdapter,
-} from "@solana/wallet-adapter-wallets";
-import { Program, Provider, web3, BN } from "@project-serum/anchor";
-import { clusterApiUrl, Connection } from "@solana/web3.js";
+import { Program, Provider, web3 } from "@project-serum/anchor";
+import { Connection } from "@solana/web3.js";
 import idl from "../../idl.json";
 
 function TweetBox() {
