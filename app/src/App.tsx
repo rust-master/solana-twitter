@@ -21,7 +21,7 @@ import React, { FC, ReactNode, useMemo } from "react";
 import idl from "./idl.json";
 import Sidebar from "./components/Sidebar/Sidebar";
 import Context from "./components/Context/Context";
-import TweetBox from "./components/TweetBox/TweetBox";
+import Feed from "./components/Feed/Feed";
 
 console.log(idl);
 
@@ -34,7 +34,7 @@ const App: FC = () => {
         <div>
             < div className="app">
                 <Sidebar />
-                <TweetBox />
+                <Feed />
                 <div className="appwallet" >
                     <Context>
                         <WalletMultiButton />

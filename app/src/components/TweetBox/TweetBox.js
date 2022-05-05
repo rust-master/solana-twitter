@@ -73,7 +73,7 @@ function TweetBox() {
                     value={tweetImage}
                     onChange={(e) => setTweetImage(e.target.value)}
                     className="tweetBox__imageInput"
-                    placeholder="Optional: Enter image URL"
+                    placeholder="#topic"
                     type="text"
                 />
 
