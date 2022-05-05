@@ -61,7 +61,7 @@ function TweetBox() {
         const b = JSON.parse(a);
         const program = new Program(b, idl.metadata.address, provider);
         try {
-            await program.rpc.sendTweet("solana", "Hi Solana", {
+            await program.rpc.sendTweet(tweetTopic, tweetMessage, {
                 accounts: {
                     tweet: baseAccount.publicKey,
                     author: program.provider.wallet.publicKey,

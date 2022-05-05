@@ -78,7 +78,7 @@ class Feed extends React.Component {
 
             for (let i = 0; i < tweetAccount.length; i++) {
                 let tweet = {
-                    'id': i + 1,
+                    'id': i,
                     'tweetText': tweetAccount[i].account.content.toString(),
                     'username': tweetAccount[i].account.topic.toString(),
                     'personal': false
@@ -96,7 +96,7 @@ class Feed extends React.Component {
             //     posts: tweets
             // });
             console.log('posts: ', this.state.posts);
-            // console.log('tweetAccount: ', tweetAccount);
+            console.log('tweetAccount: ', tweetAccount);
             // console.log('tweetAccount 0: ', tweetAccount[0].account.content.toString());
             // console.log('tweetAccount 1: ', tweetAccount[1].account.content.toString());
             // console.log('length: ', tweetAccount.length);
