@@ -4,47 +4,88 @@ import Avatar from 'avataaars';
 import { generateRandomAvatarOptions } from '../../utils/avatar';
 import { Button } from "@material-ui/core";
 
+import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import {
+    ConnectionProvider,
+    useAnchorWallet,
+    WalletProvider,
+} from "@solana/wallet-adapter-react";
+import {
+    WalletModalProvider,
+    WalletMultiButton,
+} from "@solana/wallet-adapter-react-ui";
+import {
+    GlowWalletAdapter,
+    PhantomWalletAdapter,
+    SlopeWalletAdapter,
+    SolflareWalletAdapter,
+    TorusWalletAdapter,
+} from "@solana/wallet-adapter-wallets";
+import { Program, Provider, web3, BN } from "@project-serum/anchor";
+import { clusterApiUrl, Connection } from "@solana/web3.js";
+import idl from "../../idl.json";
+
 function TweetBox() {
     const [tweetMessage, setTweetMessage] = useState("");
-    const [tweetImage, setTweetImage] = useState("");
+    const [tweetTopic, setTweetTopic] = useState("");
     const [avatarOptions, setAvatarOptions] = useState("");
 
-    //   const addTweet = async () => {
-    //     let tweet = {
-    //       'tweetText': tweetMessage,
-    //       'isDeleted': false
-    //     };
 
-    //     try {
-    //       const {ethereum} = window
+    const wallet = useAnchorWallet();
+    const baseAccount = web3.Keypair.generate();
 
-    //       if(ethereum) {
-    //         const provider = new ethers.providers.Web3Provider(ethereum);
-    //         const signer = provider.getSigner();
-    //         const TwitterContract = new ethers.Contract(
-    //           TwitterContractAddress,
-    //           Twitter.abi,
-    //           signer
-    //         )
+    function getProvider() {
+        if (!wallet) {
+            return null;
+        }
 
-    //         let twitterTx = await TwitterContract.addTweet(tweet.tweetText, tweet.isDeleted);
+        const network = "https://api.devnet.solana.com";
+        const connection = new Connection(network, "processed");
 
-    //         console.log(twitterTx);
-    //       } else {
-    //         console.log("Ethereum object doesn't exist!");
-    //       }
-    //     } catch(error) {
-    //       console.log("Error submitting new Tweet", error);
-    //     }
-    //   }
+        const provider = new Provider(connection, wallet, {
+            preflightCommitment: "processed",
+        });
+
+        return provider;
+    }
+
+    const addTweet = async () => {
+        const provider = getProvider();
+        console.log("Provider: ", provider)
+
+        if (!provider) {
+            return;
+        }
+
+        const a = JSON.stringify(idl);
+        const b = JSON.parse(a);
+        const program = new Program(b, idl.metadata.address, provider);
+        try {
+            await program.rpc.sendTweet("pakistan", "I love paksitan", {
+                accounts: {
+                    tweet: baseAccount.publicKey,
+                    author: program.provider.wallet.publicKey,
+                    systemProgram: web3.SystemProgram.programId,
+                },
+                signers: [baseAccount],
+            });
+
+            const tweetAccount = await program.account.tweet.fetch(baseAccount.publicKey);
+            console.log('account: ', tweetAccount);
+        }
+        catch (err) {
+            console.log("Transcation error: ", err);
+        }
+
+    }
 
     const sendTweet = (e) => {
         e.preventDefault();
 
-        // addTweet();
+        addTweet();
 
         setTweetMessage("");
-        setTweetImage("");
+        setTweetTopic("");
     };
 
     // Similar to componentDidMount and componentDidUpdate:
@@ -70,8 +111,8 @@ function TweetBox() {
                     />
                 </div>
                 <input
-                    value={tweetImage}
-                    onChange={(e) => setTweetImage(e.target.value)}
+                    value={tweetTopic}
+                    onChange={(e) => setTweetTopic(e.target.value)}
                     className="tweetBox__imageInput"
                     placeholder="#topic"
                     type="text"
