@@ -1,17 +1,17 @@
 {
   "version": "0.1.0",
-  "name": "basic_anchor",
+  "name": "solana_twitter",
   "instructions": [
     {
-      "name": "initialize",
+      "name": "sendTweet",
       "accounts": [
         {
-          "name": "myAccount",
+          "name": "tweet",
           "isMut": true,
           "isSigner": true
         },
         {
-          "name": "user",
+          "name": "author",
           "isMut": true,
           "isSigner": true
         },
@@ -21,62 +21,57 @@
           "isSigner": false
         }
       ],
-      "args": []
-    },
-    {
-      "name": "update",
-      "accounts": [
-        {
-          "name": "myAccount",
-          "isMut": true,
-          "isSigner": false
-        }
-      ],
       "args": [
         {
-          "name": "data",
-          "type": "u64"
+          "name": "topic",
+          "type": "string"
+        },
+        {
+          "name": "content",
+          "type": "string"
         }
       ]
-    },
-    {
-      "name": "increment",
-      "accounts": [
-        {
-          "name": "myAccount",
-          "isMut": true,
-          "isSigner": false
-        }
-      ],
-      "args": []
-    },
-    {
-      "name": "decrement",
-      "accounts": [
-        {
-          "name": "myAccount",
-          "isMut": true,
-          "isSigner": false
-        }
-      ],
-      "args": []
     }
   ],
   "accounts": [
     {
-      "name": "MyAccount",
+      "name": "Tweet",
       "type": {
         "kind": "struct",
         "fields": [
           {
-            "name": "data",
-            "type": "u64"
+            "name": "author",
+            "type": "publicKey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          },
+          {
+            "name": "topic",
+            "type": "string"
+          },
+          {
+            "name": "content",
+            "type": "string"
           }
         ]
       }
     }
   ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "TopicTooLong",
+      "msg": "The provided topic should be 50 characters long maximum."
+    },
+    {
+      "code": 6001,
+      "name": "ContentTooLong",
+      "msg": "The provided content should be 280 characters long maximum."
+    }
+  ],
   "metadata": {
-    "address": "Bs9xd4xLng5Fzrh3ykjk8tYquZqbxmDNjmtMtnGcguh7"
+    "address": "7YGPzVLSoPhJf7AVG6fdYUUMX3PaPD4hSNucRE3k4Wz2"
   }
 }
